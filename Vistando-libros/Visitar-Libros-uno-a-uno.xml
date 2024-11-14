@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="2f3a4b81-a34d-4400-bbb9-da5565361f94" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Visitar Libros uno a uno" searchProperties="true" timeout="0">
+  <con:settings id="994f4e74-5789-4a80-a54e-967eef51676f">
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="2f3a4b81-a34d-4400-bbb9-da5565361f94fileName">Visitar-Libros-uno-a-uno</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="Lisat de libros" id="e90919b1-5757-4f7a-9c31-b10e92eb7059">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="FakeRESTApi.Web V1" resourcePath="/api/v1/Books" methodName="GET" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Lisat de libros" id="36648265-f716-4c16-8944-def15b8e10bb" mediaType="application/json">
+        <con:description xsi:nil="true"/>
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Books</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="487661b7-1cd5-4c19-986a-a74d70750fb5" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="b20775df-5e15-42a9-898a-5fa8074fffb1" name="Response SLA">
+          <con:configuration>
+            <SLA>500</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+        <con:parameterOrder/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="Get_ids_from list" id="bba467a8-c5d2-497e-9239-18f5a0d4a5ef">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="JSON">
+        <con:configuration>
+          <sourceStep>Lisat de libros</sourceStep>
+          <sourceProperty>Response</sourceProperty>
+          <rowPath>$</rowPath>
+          <columnPath>['id']</columnPath>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:startRow>0</con:startRow>
+      <con:endRow>9</con:endRow>
+      <con:recordsPerIteration>1</con:recordsPerIteration>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:trimValues>false</con:trimValues>
+      <con:entitizeValues>false</con:entitizeValues>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:expandProperties>false</con:expandProperties>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Visitar un libro" id="f6fc7df0-7965-440e-99e6-e05e7e0944b6">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="FakeRESTApi.Web V1" resourcePath="/api/v1/Books/{id}" methodName="GET" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Visitar un libro" id="2379b833-ed65-4657-9783-d373dd12c9d5" mediaType="application/json">
+        <con:description xsi:nil="true"/>
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Books/2</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="59201b32-d8c1-4bf4-873f-3d5351fc6bcb" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="ecb71487-ecb9-4720-a356-ebceba60cf50" name="Response SLA">
+          <con:configuration>
+            <SLA>400</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Simple Contains" id="253278f5-c69e-4c7f-b484-4fdc1bb191c1" name="Contains">
+          <con:configuration>
+            <token>${BD DS#books_title}</token>
+            <ignoreCase>false</ignoreCase>
+            <useRegEx>false</useRegEx>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonSchemaCompliance" id="f643f324-22d6-4469-98ea-371a908b81bb" name="JSON Schema Compliance">
+          <con:configuration>
+            <schemaUrl>https://fakerestapi.azurewebsites.net/swagger/v1/swagger.json</schemaUrl>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="SwaggerComplianceAssertion" id="027ab06f-713f-4012-a4d6-bde6f932053f" name="Swagger Compliance Assertion">
+          <con:configuration>
+            <swaggerUrl>https://fakerestapi.azurewebsites.net/swagger/v1/swagger.json</swaggerUrl>
+            <strictMode>true</strictMode>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" id="41c42bc3-8228-42c6-8312-cec8357e46f0" name="JSONPath Match">
+          <con:configuration>
+            <path>$['id']</path>
+            <content>${Get_ids_from list#id}</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath RegEx Match" id="daeb1ac8-86c8-436a-95c7-3a981d754d4b" name="JSONPath RegEx Match">
+          <con:configuration>
+            <path>$</path>
+            <content>true</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+            <regEx>.*"id".*"title".*"description".*</regEx>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="id" value="${Get_ids_from list#id}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>id</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="Data Source Loop" id="ea84f94d-c241-454f-94d3-203478b28562">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>Get_ids_from list</dataSourceStep>
+      <targetStep>Visitar un libro</targetStep>
+      <discardResults>true</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testCase>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="7f875b8e-9af6-4a4a-aa41-6d55a156fcb1" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="DS Test Cases" searchProperties="true" timeout="0">
+  <con:settings id="3970234b-b13c-4119-bc91-32749246ea59">
+    <con:setting id="7f875b8e-9af6-4a4a-aa41-6d55a156fcb1fileName">DS-Test-Cases</con:setting>
+  </con:settings>
+  <con:testStep type="datasource" name="Gen DS" id="2941ae8f-f7d8-48e1-b577-75de97d974b1">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="Data Generator">
+        <con:configuration>
+          <generatedDataCount>10</generatedDataCount>
+          <generatorsTotalNumber>2</generatorsTotalNumber>
+          <lastSelectedProperty>0</lastSelectedProperty>
+          <GeneratorType0>INT</GeneratorType0>
+          <PropertyName0>id</PropertyName0>
+          <repetitionCountid>0</repetitionCountid>
+          <repeatValuesid>false</repeatValuesid>
+          <IntegerDataGeneratorMinValueid>1</IntegerDataGeneratorMinValueid>
+          <IntegerDataGeneratorMaxValueid>100</IntegerDataGeneratorMaxValueid>
+          <IntegerDataGeneratorStepValueid>1</IntegerDataGeneratorStepValueid>
+          <IntegerDataGeneratorConsequentValuesid>false</IntegerDataGeneratorConsequentValuesid>
+          <GeneratorType1>CITY</GeneratorType1>
+          <PropertyName1>name</PropertyName1>
+          <repetitionCountname>0</repetitionCountname>
+          <repeatValuesname>false</repeatValuesname>
+          <escapeSpaceSequence/>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:property>name</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="File DS" id="4b770885-ee9f-4bb2-b647-0d1c3d5c4c61">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="File">
+        <con:configuration>
+          <fileName>C:/Curso/workspace/ready-api/data_source/books/books.csv</fileName>
+          <separator>,</separator>
+          <trim>true</trim>
+          <charset>Cp1252</charset>
+          <quotedValues>false</quotedValues>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:property>title</con:property>
+      <con:property>description</con:property>
+      <con:startRow>1</con:startRow>
+      <con:endRow/>
+      <con:recordsPerIteration>1</con:recordsPerIteration>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:trimValues>false</con:trimValues>
+      <con:entitizeValues>false</con:entitizeValues>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:expandProperties>false</con:expandProperties>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasource" name="BD DS" id="f906ee4a-81d6-49bc-9fb8-a27582558b0f">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment/></con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSourceStep">
+      <con:dataSource type="Data Connection">
+        <con:configuration>
+          <Connection>Books DB( Default environment )</Connection>
+          <query>${#TestCase#books_query}</query>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>books_id</con:property>
+      <con:property>books_description</con:property>
+      <con:property>books_title</con:property>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="pedir libro concreto" id="ae645eb0-2b8b-48a0-ab9b-09801bf73c33">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="FakeRESTApi.Web V1" resourcePath="/api/v1/Books/{id}" methodName="GET" xsi:type="con:RestRequestStep">
+      <con:restRequest name="pedir libro concreto" id="2379b833-ed65-4657-9783-d373dd12c9d5" mediaType="application/json">
+        <con:description xsi:nil="true"/>
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Books/2</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="59201b32-d8c1-4bf4-873f-3d5351fc6bcb" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="ecb71487-ecb9-4720-a356-ebceba60cf50" name="Response SLA">
+          <con:configuration>
+            <SLA>200</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Simple Contains" id="253278f5-c69e-4c7f-b484-4fdc1bb191c1" name="Contains">
+          <con:configuration>
+            <token>${BD DS#books_title}</token>
+            <ignoreCase>false</ignoreCase>
+            <useRegEx>false</useRegEx>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="id" value="${BD DS#books_id}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>id</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="Loop ids" id="c5972b30-2a7d-4d3c-ac33-6f2104c366be">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>Gen DS</dataSourceStep>
+      <targetStep>REST Request 2</targetStep>
+      <discardResults>true</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="crear nuevo libro" id="8f986fc8-94d0-4c82-9c67-94b787b029b8">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="FakeRESTApi.Web V1" resourcePath="/api/v1/Books" methodName="POST" xsi:type="con:RestRequestStep">
+      <con:restRequest name="crear nuevo libro" id="3eba106f-1521-426e-b723-a33cbf597df7" mediaType="application/json; v=1.0" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+        <con:request>{\r
+  "id" : ${BD DS#books_id},\r
+  "title" : "${BD DS#books_title}",\r
+  "description": "${BD DS#books_description}",\r
+  "pageCount" : 0,\r
+  "excerpt" : "string",\r
+  "publishDate" : "2015-07-20T15:49:04-07:00"\r
+}</con:request>
+        <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Books</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a289c798-d348-4a7b-8d1f-549b6d3e3769" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="cb6d9531-48dd-42d5-a26f-823a29afd4dc" name="Response SLA">
+          <con:configuration>
+            <SLA>200</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Simple Contains" id="d866a10a-962a-45c1-8300-050fa8be929d" name="Contains">
+          <con:configuration>
+            <token>${BD DS#books_title}</token>
+            <ignoreCase>false</ignoreCase>
+            <useRegEx>false</useRegEx>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="jdbc" name="JDBC Request" id="6fde6f0e-e268-4203-a632-ea98d068af0f">
+    <con:settings>
+      <con:setting id="prettyPrintResponse">true</con:setting>
+    </con:settings>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true">
+      <con:dbConnectionName>Books DB</con:dbConnectionName>
+      <con:driver>com.mysql.jdbc.Driver</con:driver>
+      <con:connectionString>jdbc:mysql://127.0.0.1:3306/readyapidb?user=readyapi_user&amp;password=PASS_VALUE</con:connectionString>
+      <con:password>rapi123</con:password>
+      <con:connectionProperties/>
+      <con:query>SELECT title FROM books WHERE id=${BD DS#books_id}</con:query>
+      <con:assertion type="Simple Contains" id="7f403b8d-0edc-479e-be5f-bad31d46627a" name="Contains">
+        <con:configuration>
+          <token>${BD DS#books_title}</token>
+          <ignoreCase>false</ignoreCase>
+          <useRegEx>false</useRegEx>
+        </con:configuration>
+      </con:assertion>
+      <con:properties/>
+    </con:config>
+  </con:testStep>
+  <con:properties>
+    <con:property>
+      <con:name>books_query</con:name>
+      <con:value>Select books.id As books_id,   books.description As books_description,   books.title As books_title From books Limit 10</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>2941ae8f-f7d8-48e1-b577-75de97d974b1</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>ae645eb0-2b8b-48a0-ab9b-09801bf73c33</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>c5972b30-2a7d-4d3c-ac33-6f2104c366be</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>4b770885-ee9f-4bb2-b647-0d1c3d5c4c61</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>f906ee4a-81d6-49bc-9fb8-a27582558b0f</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>8f986fc8-94d0-4c82-9c67-94b787b029b8</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>6fde6f0e-e268-4203-a632-ea98d068af0f</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="/api/v1/Activities" path="/api/v1/Activities" id="19acd819-8dbd-4c79-a79e-ac6e1536150e">
+  <con:settings id="af132ff0-bbd1-4c79-99dc-c31e47f8563a">
+    <con:setting id="19acd819-8dbd-4c79-a79e-ac6e1536150efileName">%2Fapi%2Fv1%2FActivities</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="GET" id="83314086-bb7f-4d3e-94fc-d060b1ecae36" method="GET">
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE">
+      <con:mediaType>text/plain; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent>[NOT IMPLEMENTED]</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent>[ {
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+} ]</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE">
+      <con:mediaType>text/json; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent>[ {
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+} ]</con:sampleContent>
+    </con:representation>
+    <con:request name="Request 1" id="3f6ba1b7-c7f9-4f19-ab5c-f2427e5a953f" mediaType="application/json">
+      <con:description xsi:nil="true"/>
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;con:entry key="Content-Type" value="application/json" xmlns:con="http://eviware.com/soapui/config"/></con:setting>
+      </con:settings>
+      <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+      <con:request/>
+      <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Activities</con:originalUri>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:parameterOrder/>
+    </con:request>
+  </con:method>
+  <con:method name="POST" id="d5dda1fb-010b-40d2-8227-d9dc51e3b7b2" method="POST">
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE" id="">
+      <con:mediaType>text/plain; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent xsi:nil="true"/>
+    </con:representation>
+    <con:representation type="RESPONSE" id="">
+      <con:mediaType>application/json; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent>{
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="RESPONSE" id="">
+      <con:mediaType>text/json; v=1.0</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:description>Success</con:description>
+      <con:sampleContent>{
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="REQUEST" id="">
+      <con:mediaType>application/json; v=1.0</con:mediaType>
+      <con:status/>
+      <con:params/>
+      <con:description xsi:nil="true"/>
+      <con:sampleContent>{
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="REQUEST" id="">
+      <con:mediaType>text/json; v=1.0</con:mediaType>
+      <con:status/>
+      <con:params/>
+      <con:description xsi:nil="true"/>
+      <con:sampleContent>{
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+}</con:sampleContent>
+    </con:representation>
+    <con:representation type="REQUEST" id="">
+      <con:mediaType>application/*+json; v=1.0</con:mediaType>
+      <con:status/>
+      <con:params/>
+      <con:description xsi:nil="true"/>
+      <con:sampleContent>{
+  "id" : 0,
+  "title" : "string",
+  "dueDate" : "2015-07-20T15:49:04-07:00",
+  "completed" : true
+}</con:sampleContent>
+    </con:representation>
+    <con:request name="Request 1" id="907020f4-7679-49b9-97cb-abcd91334c71" mediaType="multipart/form-data" postQueryString="false">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+      <con:request>{\r
+  "id" : 0,\r
+  "title" : "string",\r
+  "dueDate" : "2015-07-20T15:49:04-07:00",\r
+  "completed" : true\r
+}</con:request>
+      <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Activities</con:originalUri>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+    </con:request>
+    <con:request name="Request 2" id="231b8315-d838-43e5-8772-02817ffc4ae6" mediaType="text/json; v=1.0">
+      <con:settings/>
+      <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+      <con:request>{\r
+  "id" : 0,\r
+  "title" : "string",\r
+  "dueDate" : "2015-07-20T15:49:04-07:00",\r
+  "completed" : true\r
+}</con:request>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+    </con:request>
+    <con:request name="Request 3" id="a816a078-986e-4a8a-af6d-6c759b9b864f" mediaType="application/*+json; v=1.0">
+      <con:settings/>
+      <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+      <con:request>{\r
+  "id" : 0,\r
+  "title" : "string",\r
+  "dueDate" : "2015-07-20T15:49:04-07:00",\r
+  "completed" : true\r
+}</con:request>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+    </con:request>
+  </con:method>
+</con:resource>

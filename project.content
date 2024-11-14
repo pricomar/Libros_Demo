@@ -1,0 +1,17 @@
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FActivities.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FBooks.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FBooks%2F%7Bid%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FCoverPhotos.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FCoverPhotos%2Fbooks%2Fcovers%2F%7BidBook%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FCoverPhotos%2F%7Bid%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FUsers.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FUsers%2F%7Bid%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FActivities%2F%7Bid%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FAuthors.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FAuthors%2Fauthors%2Fbooks%2F%7BidBook%7D.xml
+FakeRESTApi.Web-V1\%2Fapi%2Fv1%2FAuthors%2F%7Bid%7D.xml
+Vistando-libros\Listar-libros.xml
+Vistando-libros\DS-Test-Cases.xml
+Vistando-libros\Visitar-Libros-uno-a-uno.xml
+Script-Sxamples\Test-Case-for-scritps.xml
+Script-Sxamples\DataSource-Scripts.xml

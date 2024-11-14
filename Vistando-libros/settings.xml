@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite xmlns:con="http://eviware.com/soapui/config" id="a1544437-0173-4c04-8da6-e6f9c9b25f23" name="Vistando libros">
+  <con:settings id="15ccf6d4-249e-4f2b-b36b-e9dba67d2d1c">
+    <con:setting id="a1544437-0173-4c04-8da6-e6f9c9b25f23fileName">Vistando-libros</con:setting>
+  </con:settings>
+  <con:runType>SEQUENTIAL</con:runType>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testSuite>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" id="f0a28348-b063-45f5-a45b-f3a73f98aab5" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Test Case for scritps" searchProperties="true" timeout="0">
+  <con:settings id="e52f8d4f-b190-4813-93c9-2ede002daadd">
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="f0a28348-b063-45f5-a45b-f3a73f98aab5fileName">Test-Case-for-scritps</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="getOne" id="058227fa-7f38-4ea3-9aa0-759400e95885">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="FakeRESTApi.Web V1" resourcePath="/api/v1/Books/{id}" methodName="GET" xsi:type="con:RestRequestStep">
+      <con:restRequest name="getOne" id="2379b833-ed65-4657-9783-d373dd12c9d5" mediaType="application/json">
+        <con:description xsi:nil="true"/>
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://fakerestapi.azurewebsites.net/</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://fakerestapi.azurewebsites.net/api/v1/Books/2</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="2e3e231f-a4b6-464c-9924-1157dd225d4e" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="50ecda90-a633-488f-abb6-54e7dc969db9" name="Response SLA">
+          <con:configuration>
+            <SLA>700</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="GroovyScriptAssertion" id="27746681-f4d6-41bb-a82d-5a55b44cbdcf" name="Script Assertion">
+          <con:configuration>
+            <scriptText>import groovy.json.JsonSlurper
+
+log.info("Executing validate response script...")
+def response = messageExchange.response
+
+// show headers
+def headers = response.responseHeaders
+for (var aHeader in headers){
+	log.info("aHeader: ${aHeader}")
+}
+
+// assert status
+String status = headers.get("#status#")
+log.info("status: ${status}")
+assert (status.indexOf("200") >=0)
+
+// assert body
+def bodyStr = response.contentAsString
+log.info("bodyStr: ${bodyStr}")
+
+// transform to json
+def parser = new JsonSlurper()
+
+def jsonResp = parser.parseText(bodyStr)
+def title = jsonResp.title
+
+log.info("title: ${title}")
+
+assert title ==~ /Book [0-9]{1,}/</scriptText>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="id" value="2"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>id</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Update test case prop" id="40bce2d5-20f7-4597-93c6-ec27d2962470">
+    <con:settings/>
+    <con:config>
+      <script>log.info("============= SCRIPT UDPATE PROP =================I")
+
+def propToUpdatte = 'MyProp'
+def newValue = 'new Value'
+
+// --- Con context
+def currTescCase = context.getTestCase()
+log.info("Test case:: ${ currTescCase.name}")
+
+def tcProps =  currTescCase.properties
+
+for (var aProp  in tcProps){
+	log.info("Prop: ${aProp.key}")
+	if(aProp.key == propToUpdatte){
+		aProp.setValue(newValue);
+		break
+	}
+}
+
+def aProp = currTescCase.getProperty(propToUpdatte)
+aProp.setValue(newValue);
+
+// con testrunner
+def prop2ToUpdate = 'SecProp'
+def newValue2 = 'new Value 2'
+testRunner.getTestCase().getProperty(prop2ToUpdate).setValue(newValue2)
+
+// update with previous result
+def testResults = testRunner.results
+def result = ''
+def  stepName = "getOne"
+
+for( aResp in testResults ){
+	log.info ">  TestStep [" + aResp.testStep.name + "] finished with status " + aResp.status
+	if( aResp.testStep.name == stepName){		
+		result = aResp.responseContent
+		//break;
+	}
+}
+
+testRunner.getTestCase().getProperty(prop2ToUpdate).setValue(result)
+log.info("Test case prop 2: ${testRunner.getTestCase().getProperty(prop2ToUpdate).getValue()} ")</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Lib use" id="646a1b6f-d9ee-4db9-b6fa-0d5f19adb523">
+    <con:settings/>
+    <con:config>
+      <script>import Callee
+
+c = new Callee()
+log.info(c.hello())
+
+Callee.salute("Ricardo",log)</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Access assertions" id="0bc21e8c-1e5c-4b8c-95a9-e5e16a096151">
+    <con:settings/>
+    <con:config>
+      <script>log.info("============= SCRIPT ACCESS ASSERTIONS  =================I")
+
+testRunner.testCase.testSteps.each{ name,props ->
+    log.info "Test step name: $name"
+    // check that the testStep class support assertions     
+    if(props.metaClass.respondsTo(props, "getAssertionList")){
+        // get assertionList
+        props.getAssertionList().each{
+           log.info "-Assertion:  $it.label - $it.status"
+        }
+    }
+}
+
+log.info("END....")</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasink" name="Save results" id="70555cda-a0dc-4c6c-90ef-d47d68de449c">
+    <con:settings/>
+    <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:DataSinkStep">
+      <con:dataSink type="Groovy">
+        <con:configuration>
+          <script>import groovy.sql.Sql
+import java.util.Date   
+
+log.info("Storing results scrpit...")
+
+
+def stepName = "getOne"
+
+// DB params
+try{
+	def sql = Sql.newInstance('jdbc:mysql://localhost:3306/productsdb', 'products_user', 'rapi123', 'com.mysql.jdbc.Driver')
+	sql.connection.autoCommit = false
+}catch(Exception ex){
+	log.error("Error conectándose: ${ex}")
+	//testRunner.fail("Error de conexión")
+}
+
+Date date = new Date()
+def fecha = date.format( 'yyyy-MM-dd' )
+def testStepName = 'login user'
+
+String status = '';
+def passed
+
+/* Using a property */
+/*
+def testStep =  context.testCase.getTestStepByName("Guardar token")
+def stepProperty = testStep.getProperty("token")
+def passed = stepProperty.getValue()!=null
+*/
+
+/* Rerunning a step */
+
+/*
+def rtestStep =  context.testCase.getTestStepByName(stepName)
+String status = testRunner.runTestStep(rtestStep).status
+passed = status.equals("PASS")
+log.info("status: ${status}")*/
+
+/* Searching for results */
+log.info("results: ${testRunner.results}")
+for( r in testRunner.results ){
+	log.info "*** TestStep [" + r.testStep.name + "] finished with status " + r.status
+	if(stepName == r.testStep.name){		
+		status = r.status
+		break;
+	}
+}
+
+if(status != ''){
+	passed = status.equals("PASS")
+	// Geneate query
+	def sqlstr = "INSERT INTO results (fecha,teststepname,resultado) VALUES (${fecha},${stepName}, ${passed})" 
+	log.info("sqlstr: ${sqlstr}")	
+	
+	// Insert
+	try {
+		sql.execute(sqlstr);
+		sql.commit()
+		log.info("Successfully committed")
+	}catch(Exception ex) {
+		sql.rollback()
+		log.error("Transaction rollback: ${ex}")		
+	}
+	
+	sql.close()
+}</script>
+        </con:configuration>
+      </con:dataSink>
+      <con:properties/>
+    </con:config>
+  </con:testStep>
+  <con:properties>
+    <con:property>
+      <con:name>MyProp</con:name>
+      <con:value>new Value</con:value>
+    </con:property>
+    <con:property>
+      <con:name>SecProp</con:name>
+      <con:value>{"id":2,"title":"Book 2","description":"Consetetur aliquyam lorem ut minim vero rebum erat invidunt. Dolores gubergren tempor ipsum et duo. Takimata aliquyam exerci amet aliquyam amet sit tempor duis aliquyam consequat. Sanctus dolore duo eirmod autem at velit.\n","pageCount":200,"excerpt":"Eu sed dolor magna amet sanctus erat diam et accusam ipsum sadipscing. Dolor aliquam accusam est. Eum erat takimata augue elit et stet amet feugiat. Takimata et consetetur rebum tempor diam esse. Et et feugait elitr est takimata nonumy duo duo et stet. Molestie quod dolor. Duis dolor sed adipiscing amet diam nonumy feugait eirmod voluptua. Ullamcorper elitr diam rebum hendrerit et duo et sanctus autem lorem invidunt duis tempor at. Aliquyam takimata no voluptua magna sadipscing eleifend. Et et dolor. Et sed iusto no labore sit dignissim eirmod gubergren tempor in autem. Sadipscing diam placerat diam iriure dolor amet sit aliquip sea at autem sanctus. Imperdiet sanctus amet enim lorem erat at elitr erat ipsum dolore tempor kasd nobis. Dolor kasd ut kasd te voluptua elitr invidunt diam ut dolor consetetur at.\nIpsum dolor consequat. Dolor lorem id takimata magna nam commodo takimata ea invidunt erat magna amet ut est aliquip accumsan. Nulla ut et dolor nulla et sea. Accusam consetetur est lorem ex et et takimata amet. Vero ut kasd est nulla dolore. Sed tempor labore erat diam no. Vel praesent clita eleifend sed ullamcorper. Sed est sanctus diam laoreet aliquyam eos sit tempor dolore sed ipsum no amet stet no tempor stet cum. Et vel magna elitr in eirmod tempor sanctus ea elitr duo ipsum duo stet. Et ipsum amet nonumy odio diam et ut dolore sit sit diam. Ut illum ea sit ea sed et adipiscing diam dolores nonumy. Erat accusam voluptua hendrerit magna aliquam tempor nisl sit. Sed eirmod lobortis erat esse takimata erat kasd sanctus eos amet diam rebum. Cum no nostrud lorem ea nonummy erat no iusto sit eirmod magna justo eos in labore vero. Clita et lorem et duo amet diam erat no zzril dolores takimata dolor duis sed ut.\nConsequat vel amet aliquyam erat vero eirmod at qui rebum sed vel lorem no dolor ea hendrerit. Sit et et aliquyam ipsum invidunt qui takimata et tempor. Dolor blandit sit ipsum sit eleifend nisl wisi ea sit sit. Duis stet sed labore voluptua feugiat euismod illum labore et justo ullamcorper elitr aliquam ea. Diam magna eos voluptua vero dolor erat diam dolore duo dignissim at voluptua et aliquyam imperdiet sadipscing. Laoreet dolores nonumy rebum euismod dolore invidunt nonumy et no duis erat nonumy velit. Aliquam et eos adipiscing no eos te amet ea sanctus feugait esse exerci. Et clita aliquyam et in sit tincidunt takimata sit est lorem. At augue sed at dolor feugiat erat est takimata tempor gubergren ipsum sadipscing iriure. Kasd commodo rebum rebum diam magna sed facilisis lorem.\nDolores consectetuer aliquyam diam justo augue ut sed euismod. Ut est lorem invidunt est et voluptua ipsum ut stet suscipit ipsum eos exerci diam lorem sit iriure. Diam takimata elitr sed eirmod sit lorem takimata est vero justo dolore invidunt tempor sed. Ullamcorper vulputate no amet magna dolor illum veniam sea feugiat quis sed voluptua iusto ad minim duis ut nostrud. Stet sit blandit est vel et sed diam eirmod et. Sed aliquam amet ea ex kasd et elit doming kasd in tempor at. Aliquyam commodo duo. Consetetur sed consectetuer elitr gubergren sit amet. Consetetur lorem justo amet stet tempor sed tempor. In magna tincidunt aliquyam diam. Feugait at clita lorem accusam erat ut eu ea. Sit iriure ad vel hendrerit sed ea eirmod no invidunt. Laoreet lorem exerci sed dolor hendrerit sit hendrerit diam iusto sed sed consetetur no diam labore laoreet gubergren autem. Amet dolore eos clita sed. Sit consequat est rebum labore odio dolores veniam sanctus et dolor. Option erat et te in justo amet aliquyam voluptua dolore diam facilisis dolore accusam erat erat accumsan et.\nLorem stet dolores ipsum. Consetetur diam rebum ipsum dolores dolor labore dolores duis aliquyam. Magna eirmod dolore eos. Diam kasd at et clita. Dolor tempor sit magna. Et eos dolor aliquyam in ipsum vulputate sea sed ut lorem qui enim sanctus diam.\n","publishDate":"2024-11-12T07:04:11.9092653+00:00"}</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+</con:testCase>
